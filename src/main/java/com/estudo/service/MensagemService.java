@@ -1,8 +1,8 @@
-package com.estudo.estudo.service;
+package com.estudo.service;
 
 import org.springframework.stereotype.Service;
 
-import com.estudo.estudo.repository.MensagemRepository;
+import com.estudo.repository.MensagemRepository;
 
 @Service
 public class MensagemService {

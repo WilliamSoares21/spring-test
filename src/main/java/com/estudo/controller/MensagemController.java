@@ -1,10 +1,10 @@
-package com.estudo.estudo.controller;
+package com.estudo.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.estudo.estudo.service.MensagemService;
+import com.estudo.service.MensagemService;
 
 @RestController
 @RequestMapping("/api")
