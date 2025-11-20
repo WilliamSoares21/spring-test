@@ -2,6 +2,7 @@ package com.estudo.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estudo.exceptions.RecursoNaoEncontradoException;
 import com.estudo.model.Produto;
 import com.estudo.service.ProdutoService;
 
@@ -29,10 +31,9 @@ public class ProdutoController {
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Produto> buscarProduto(@PathVariable Long id) {
-    return produtoService.buscarPorId(id)
-        .map(ResponseEntity::ok)
-        .orElse(ResponseEntity.notFound().build());
+  public ResponseEntity<?> buscarProduto(@PathVariable Long id) {
+    Produto produto = produtoService.buscarPorId(id);
+    return ResponseEntity.ok(produto);
   }
 
   @PostMapping

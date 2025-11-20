@@ -7,5 +7,4 @@ import com.estudo.model.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Long> {
-
 }
