@@ -1,0 +1,48 @@
+Migrar de Supabase para Neon Database
+
+Substituir Supabase por Neon devido a problemas de conectividade IPv6.
+O Neon oferece suporte completo a IPv4, garantindo acesso de qualquer rede.
+
+Alterações principais:
+
+🔧 Configuração do Banco
+- Migrar para Neon Database (PostgreSQL serverless)
+- Connection string com suporte IPv4 nativo
+- SSL obrigatório mantido (sslmode=require)
+
+🔒 Segurança
+- Implementar variáveis de ambiente para credenciais
+- Adicionar .env.example como template
+- Atualizar .gitignore para proteger .env
+- Remover credenciais hardcoded
+
+📚 Documentação
+- Atualizar README.md com instruções do Neon
+- Criar MIGRACAO_NEON.md com guia passo a passo
+- Documentar conexão via pgAdmin 4
+- Adicionar instruções de obtenção de credenciais
+
+🚀 Automação
+- Criar script run.sh para carregar .env automaticamente
+- Simplificar processo de execução
+
+✅ Vantagens da Migração
+- Suporte IPv4 completo (resolve conectividade)
+- Serverless com escala automática
+- Free tier 3GB storage
+- Branching nativo para testes
+- Backups automáticos
+- Latência reduzida
+
+⚠️ Breaking Changes
+- Arquivo .env agora é OBRIGATÓRIO
+- Credenciais do Supabase não funcionam mais
+- Necessário recriar .env em cada máquina
+
+📋 Instruções Pós-Pull
+1. Copiar: cp .env.example .env
+2. Obter credenciais no Neon Console
+3. Preencher variáveis no .env
+4. Executar: ./run.sh
+
+Testado: Ubuntu 24.04, Java 21, Spring Boot 3.5.7, PostgreSQL 17.5

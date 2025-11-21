@@ -4,6 +4,10 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+### Environment Variables ###
+.env
+.env.local
+
 ### STS ###
 .apt_generated
 .classpath
@@ -33,7 +37,8 @@ build/
 .vscode/
 
 # Ignore Spring Boot application property files (local overrides)
-**/application.properties
+# Comentado para permitir versionamento com variáveis de ambiente
+# **/application.properties
 **/application-*.properties
-**/application.yml
+# **/application.yml
 **/application-*.yml
