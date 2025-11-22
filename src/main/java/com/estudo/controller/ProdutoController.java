@@ -41,6 +41,11 @@ public class ProdutoController {
     return produtoService.salvarProduto(produto);
   }
 
+  @PostMapping("/batch")
+  public List<Produto> criarProdutos(@RequestBody List<Produto> produtos) {
+    return produtoService.salvarProdutos(produtos);
+  }
+
   @DeleteMapping("/{id}")
   public ResponseEntity<Void> deletarProduto(@PathVariable Long id) {
     produtoService.deletarProduto(id);

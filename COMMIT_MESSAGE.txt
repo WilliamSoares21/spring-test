@@ -1,48 +1,49 @@
-Migrar de Supabase para Neon Database
+feat: preparar backend para integração full stack e adicionar roadmap
 
-Substituir Supabase por Neon devido a problemas de conectividade IPv6.
-O Neon oferece suporte completo a IPv4, garantindo acesso de qualquer rede.
+Melhorias essenciais para desenvolvimento full stack:
 
-Alterações principais:
+🔗 Backend Improvements:
+- Configurar CORS para permitir requisições de frontend (React/Vue/Angular)
+  * Adicionar origens permitidas: localhost:3000, 5173, 4200
+  * Configurar headers e métodos HTTP permitidos
+  * Criar WebConfig para CORS global
+  * Adicionar configuração CORS no SecurityConfig
 
-🔧 Configuração do Banco
-- Migrar para Neon Database (PostgreSQL serverless)
-- Connection string com suporte IPv4 nativo
-- SSL obrigatório mantido (sslmode=require)
+- Aprimorar tratamento de erros global (GlobalExceptionHandler)
+  * Adicionar respostas JSON estruturadas com timestamp e path
+  * Implementar tratamento específico para BadCredentialsException (401)
+  * Melhorar mensagens de erro para consumo do frontend
+  * Padronizar formato de resposta de erros
 
-🔒 Segurança
-- Implementar variáveis de ambiente para credenciais
-- Adicionar .env.example como template
-- Atualizar .gitignore para proteger .env
-- Remover credenciais hardcoded
+- Adicionar endpoint de criação em lote de produtos
+  * POST /api/produtos/batch para criar múltiplos produtos
+  * Implementar ProdutoService.salvarProdutos()
+  * Suporte para criação em massa via JSON array
 
-📚 Documentação
-- Atualizar README.md com instruções do Neon
-- Criar MIGRACAO_NEON.md com guia passo a passo
-- Documentar conexão via pgAdmin 4
-- Adicionar instruções de obtenção de credenciais
+📚 Documentação:
+- Criar FULLSTACK_ROADMAP.md com plano completo de desenvolvimento
+  * 10 fases detalhadas (backend, frontend, integração, deploy)
+  * Checklist estilo issues com 150+ tarefas
+  * Estimativas de tempo e stack recomendada
+  * Comandos úteis e recursos de estudo
 
-🚀 Automação
-- Criar script run.sh para carregar .env automaticamente
-- Simplificar processo de execução
+- Atualizar README.md
+  * Documentar todos os endpoints da API com exemplos práticos
+  * Adicionar seção de autenticação JWT com instruções
+  * Incluir instruções de uso dos endpoints protegidos
+  * Adicionar link para roadmap full stack
+  * Exemplos de requisições com curl e Postman
 
-✅ Vantagens da Migração
-- Suporte IPv4 completo (resolve conectividade)
-- Serverless com escala automática
-- Free tier 3GB storage
-- Branching nativo para testes
-- Backups automáticos
-- Latência reduzida
+📦 Arquivos alterados:
+- src/main/java/com/estudo/config/WebConfig.java (novo)
+- src/main/java/com/estudo/security/SecutiryConfig.java
+- src/main/java/com/estudo/exceptions/GlobalExceptionHandler.java
+- src/main/java/com/estudo/controller/ProdutoController.java
+- src/main/java/com/estudo/service/ProdutoService.java
+- README.md
+- FULLSTACK_ROADMAP.md (novo)
 
-⚠️ Breaking Changes
-- Arquivo .env agora é OBRIGATÓRIO
-- Credenciais do Supabase não funcionam mais
-- Necessário recriar .env em cada máquina
+⚠️ Breaking Changes: Nenhuma
 
-📋 Instruções Pós-Pull
-1. Copiar: cp .env.example .env
-2. Obter credenciais no Neon Console
-3. Preencher variáveis no .env
-4. Executar: ./run.sh
-
-Testado: Ubuntu 24.04, Java 21, Spring Boot 3.5.7, PostgreSQL 17.5
+✅ Testes: Todos os testes passando
+🎯 Próximo passo: Iniciar desenvolvimento do frontend (Fase 3)

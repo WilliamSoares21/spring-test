@@ -4,6 +4,8 @@
 
 Este é um projeto acadêmico desenvolvido para fins de **estudo e aprendizado do framework Spring Boot**. O objetivo é explorar e implementar os principais conceitos do ecossistema Spring, como Injeção de Dependências, REST APIs, Spring Data JPA e arquitetura MVC.
 
+🎯 **Evoluindo para Full Stack!** - Veja o [roadmap completo](FULLSTACK_ROADMAP.md) para transformar esta API em uma aplicação completa com frontend.
+
 ## 🎯 Objetivos de Aprendizado
 
 - ✅ Compreender a estrutura básica de uma aplicação Spring Boot
@@ -15,10 +17,13 @@ Este é um projeto acadêmico desenvolvido para fins de **estudo e aprendizado d
 
 ## 🛠️ Tecnologias Utilizadas
 
+### Backend
 - **Java 21** - Linguagem de programação
 - **Spring Boot 3.5.7** - Framework principal
 - **Spring Web** - Para criação de APIs REST
 - **Spring Data JPA** - Para persistência e acesso a dados
+- **Spring Security** - Autenticação e autorização
+- **JWT (JSON Web Tokens)** - Autenticação stateless
 - **PostgreSQL (Neon)** - Banco de dados relacional serverless na nuvem
 - **Maven** - Gerenciamento de dependências
 - **Spring DevTools** - Para desenvolvimento com hot reload
@@ -212,24 +217,85 @@ Interface que estende `JpaRepository` para operações CRUD automáticas no banc
 ./mvnw test
 ```
 
-## 📖 Exemplos de Endpoints
+## 📖 API Endpoints
 
-### Hello World
+### 🔓 Endpoints Públicos (sem autenticação)
+
+#### Autenticação
 ```bash
-GET http://localhost:8080/
+# Registrar novo usuário
+POST http://localhost:8080/auth/register
+Content-Type: application/json
+
+{
+  "username": "usuario",
+  "password": "senha123"
+}
+
+# Login (retorna JWT token)
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "usuario",
+  "password": "senha123"
+}
 ```
 
-### Mensagens (exemplo)
-```bash
-GET http://localhost:8080/api/mensagens
-POST http://localhost:8080/api/mensagens
-```
+### 🔒 Endpoints Protegidos (requerem JWT token)
 
-### Produtos (exemplo)
+#### Produtos
 ```bash
+# Listar todos os produtos
 GET http://localhost:8080/api/produtos
+Authorization: Bearer {seu_token_jwt}
+
+# Buscar produto por ID
+GET http://localhost:8080/api/produtos/{id}
+Authorization: Bearer {seu_token_jwt}
+
+# Criar produto
 POST http://localhost:8080/api/produtos
+Authorization: Bearer {seu_token_jwt}
+Content-Type: application/json
+
+{
+  "nome": "Produto Teste",
+  "preco": 99.90
+}
+
+# Criar múltiplos produtos
+POST http://localhost:8080/api/produtos/batch
+Authorization: Bearer {seu_token_jwt}
+Content-Type: application/json
+
+[
+  {"nome": "Produto 1", "preco": 99.90},
+  {"nome": "Produto 2", "preco": 149.90}
+]
+
+# Deletar produto
+DELETE http://localhost:8080/api/produtos/{id}
+Authorization: Bearer {seu_token_jwt}
 ```
+
+#### Outros
+```bash
+# Hello World
+GET http://localhost:8080/api/hello
+Authorization: Bearer {seu_token_jwt}
+
+# Mensagem
+GET http://localhost:8080/api/mensagem
+Authorization: Bearer {seu_token_jwt}
+```
+
+### 🔑 Como usar o JWT Token
+
+1. Faça login no endpoint `/auth/login`
+2. Copie o token retornado
+3. Use o token no header `Authorization: Bearer {token}` em todas as requisições protegidas
+4. O token expira em 1 hora (faça login novamente se expirar)
 
 ## 🤝 Contribuindo
 

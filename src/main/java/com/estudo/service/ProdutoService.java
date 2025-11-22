@@ -31,6 +31,10 @@ public class ProdutoService {
     return produtoRepository.save(produto);
   }
 
+  public List<Produto> salvarProdutos(List<Produto> produtos) {
+    return produtoRepository.saveAll(produtos);
+  }
+
   public void deletarProduto(Long id) {
     if (!produtoRepository.existsById(id)) {
       throw new RecursoNaoEncontradoException("Produto com ID " + id + " não encontrado");
